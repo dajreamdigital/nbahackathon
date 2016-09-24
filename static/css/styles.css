@@ -1,3 +1,7 @@
+html {
+  
+}
+
 body {
   padding-bottom: 40px;
   text-decoration: none;
@@ -33,4 +37,4 @@ body {
 
 .no-underline{
    text-decoration: none;
-} 
+}
