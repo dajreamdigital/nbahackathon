@@ -34,12 +34,15 @@ def main():
 @app.route('/twitter')
 def twitter():
 
-    for result in tweepy.Cursor(api.search, q="to:KingJames", since="2016-09-20", until="2016-09-22").items():
+    # configuration
+    name = 'KingJames'
+    since = "2015-09-21"
+    count = 0
+
+    for result in tweepy.Cursor(api.search, q="from:"+name, since=since).items():
+        count = count + 1
         print result.text
-        if result:
-            print result.text
-        else:
-            print ('no data')
+    print (count)
 
     # for result in api.search("nba"):
     #     print result.text
@@ -48,7 +51,7 @@ def twitter():
     #     else:
     #         print ('no data23')
 
-    return render_template('twitter.html')
+    return render_template('twitter.html', actvity_count=count)
     # return json(api_data)
 
 
