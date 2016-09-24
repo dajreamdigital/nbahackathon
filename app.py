@@ -1,10 +1,7 @@
-import httplib2
-
-
 from flask import Flask, render_template, json, request, redirect
 
 app = Flask(__name__)
-app.config['DEBUG'] = True 
+app.config['DEBUG'] = True
 
 @app.route('/')
 def main():
@@ -14,6 +11,12 @@ def main():
     10 events on the user's calendar.
     """
     return render_template('index.html', api_data="")
+
+
+@app.route('/twitter')
+def twitter():
+    return render_template('twitter.html', api_data="")
+
 
 
 if __name__ == "__main__":

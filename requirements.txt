@@ -1,5 +1,13 @@
 Flask==0.10.1
+future==0.15.2
 gunicorn==19.0.0
+itsdangerous==0.24
 Jinja2==2.7.3
-Werkzeug==0.10.4
+MarkupSafe==0.23
+oauthlib==2.0.0
+python-twitter==3.1
 requests==2.2.1
+requests-oauthlib==0.7.0
+six==1.10.0
+tweepy==3.5.0
+Werkzeug==0.10.4
