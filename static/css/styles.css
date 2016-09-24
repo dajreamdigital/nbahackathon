@@ -1,5 +1,21 @@
 html {
-  
+  font-family: 'Droid Sans', sans-serif;
+
+}
+
+.charts{
+  margin: auto;
+  text-align: center;
+  margin-top: 48px;
+}
+
+.skills {
+  display: inline-block;
+  margin: 15px;
+}
+.tweets {
+  display: inline-block;
+  margin: 15px;
 }
 
 body {

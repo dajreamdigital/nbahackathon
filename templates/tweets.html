@@ -5,26 +5,39 @@
     <h1 class="center">NBA Hackathon</h1>
     <link href="/static/css/styles.css" rel="stylesheet">
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-    <br>
-
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
   </head>
 
   <body>
     <h2 class="center"> Results </h2>
     <br>
     {% if api_data %}
-      <h3 class="center">Twitter Handle: {{ api_data['handle'] }}</h3>
+
+      <h3 class="center">Twitter Handle: @{{ api_data['handle'] }}</h3>
       <h3 class="center">Tweet count: {{ api_data['count'] }}</h3>
-      <h3 class="center">Tweets:</h3>
+
+      <!-- <h3 class="center">Tweets:</h3>
       {% for tweet in api_data['tweets'] %}
         {{ tweet }}
         <br>
-      {% endfor %}
+      {% endfor %} -->
     {% else %}
       <h2 class="center"> Something went wrong. </h2>
     {% endif %}
+    <div class="charts">
+      <div class="skills">
+          <canvas id="skills" width=300 height=300></canvas>
+      </div>
 
+      <div class="tweets">
+        <canvas id="tweets" width=300 height=300></canvas>
+      </div>
+    </div>
+
+
+
+    <script src='static/nbachart.js'></script>
 
   </body>
 </html>
-
