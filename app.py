@@ -122,6 +122,8 @@ def calculate():
 @app.route('/search_all', methods = ['GET','POST'])
 def search_all():
     #2014-2015 source: http://www.usatoday.com/story/sports/nba/2014/10/27/nba-teams-announced-their-opening-day-rosters-for-the-2014-15-season/18035777/
+    handles = ["KingJames", "KyrieIrving", "kevinlove", "TheRealJRSmith", "Channing_Frye", "imanshumpert", "RealTristan13", "mowilliams"]
+
     # handles = ["StephenCurry30", "Money23Green", "hbarnes", "KlayThompson", "festus", "TheBlurBarbosa", "JustHolla7", "andre", "ShaunLivingston", "Dlee042", "Mospeights16", "BRush_25"]
     # handles = []
     # handles = ["DeMar_DeRozan", "Klow7", "Cory_Joe", "JValanciunas", "T_DotFlight31", "npowell2404", "pdpatt", "jtthekid", "pskills43", "Bebe92", "Bruno_Caboclo", "EJSingler", "delonwright", "bradyheslip"]
