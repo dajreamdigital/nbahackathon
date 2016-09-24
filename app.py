@@ -31,6 +31,7 @@ def main():
     return render_template('index.html', api_data="")
 
 
+<<<<<<< HEAD
 @app.route('/twitter')
 def twitter():
 
@@ -55,6 +56,17 @@ def twitter():
     # return json(api_data)
 
 
+=======
+@app.route('/search', methods = ['GET','POST'])
+def search():
+    handle = request.form['handle']
+    since = request.form['since']
+    until = request.form['until']
+    return_list = [handle, since, until]
+    print(handle, since, until)
+
+    return render_template('tweets.html', api_data = return_list)
+>>>>>>> master
 
 
 if __name__ == "__main__":

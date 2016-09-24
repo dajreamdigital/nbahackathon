@@ -2,11 +2,23 @@
 <html lang="en">
   <head>
     <title>NBA Hackathon</title>
-    <h1>NBA Hackathon</h1>
+    <h1 class="center">NBA Hackathon</h1>
+    <link href="/static/css/styles.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <br>
 
   </head>
 
   <body>
+    <h2 class="center">Find tweets to a specific player in a date range.</h2>
+        <form class="form-search center" action="/search" method ="post" onsubmit="sayThanks()">
+          <input type="text" name="handle" id="inputName" class="form-control center" placeholder="Twitter Handle" required>
+          <input type="text" name="since" id="inputTime" class="form-control center" placeholder="Date Since (ex: 2016-03-10)" required>
+          <input type="text" name="until" id="inputTime" class="form-control center" placeholder="Date Until (ex: 2016-03-16)" required>
+          <br>
+          <!-- <p><a class="btn btn-lg btn-success" href="/signup" role="button">Submit!</a></p> -->
+          <input class="btn btn-lg btn-success center" type="submit" value="Search"></input>
+        </form>
 
 
   </body>
