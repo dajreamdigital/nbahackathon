@@ -1,4 +1,6 @@
 
+
+// building the skills radar chart using chartjs
 var skillsData = {
 	labels : ["January","February","March","April","May","June"],
 	datasets : [
@@ -28,6 +30,7 @@ var skillsChart = new Chart(context, {
     // options: options
 });
 
+// building the twitter bar chart using chartjs
 var tweetData = {
 	labels : ["Team Avg. Twitter Activity","Player Twitter Activity"],
 	datasets : [
