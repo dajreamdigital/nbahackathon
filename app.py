@@ -26,6 +26,8 @@ def main():
 @app.route('/search', methods = ['GET','POST'])
 def search():
     handle = request.form['handle']
+
+
     since = "2015-09-21"
     count = 0
 
@@ -34,21 +36,80 @@ def search():
     for result in tweepy.Cursor(api.search, q="from:"+handle, since=since).items():
         count = count + 1
         tweets.append(result.text)
-        print result.text
-    print (count)
 
-    return_dict = {"handle": handle, "count": count, "tweets": tweets}
+    with open('stats.json') as stats_data:
+        stats = json.load(stats_data)
+
+    player_run = stats[handle][0]
+    player_ballhold = stats[handle][1]
+    player_pass = stats[handle][2]/stats[handle][3]
+    player_turnover = stats[handle][4]
+    player_touch = stats[handle][5]
+    player = {"run": player_run, "ballhold": player_ballhold, "pass": player_pass, "turnover": player_turnover, "touch": player_touch}
+
+    with open('stats_cavs.json') as stats_data:
+        stats_cavs = json.load(stats_data)
+
+    avg_run = stats_cavs["avg_run"]
+    avg_ballhold = stats_cavs["avg_ballhold"]
+    avg_pass = stats_cavs["avg_pass"]
+    avg_turnover = stats_cavs["avg_turnover"]
+    avg_touch = stats_cavs["avg_touch"]
+
+    average = {"run": avg_run, "ballhold": avg_ballhold, "pass": avg_pass, "turnover": avg_turnover, "touch": avg_touch}
+
+    return_dict = {"handle": handle, "count": count, "player": player, "average": average, "tweets": tweets}
 
     print return_dict
     return render_template('tweets.html', api_data = return_dict)
     # return json(api_data)
 
 
+@app.route('/calculate_team_average')
+def calculate():
+    with open('stats.json') as stats_data:
+        stats = json.load(stats_data)
+
+    total_run = 0
+    total_ballhold = 0
+    total_pass_made = 0
+    total_pass_received = 0
+    total_turnover = 0
+    total_touch = 0
+    handles = ["KingJames", "KyrieIrving", "kevinlove", "Sirdom1", "JordyMac52", "2kayzero", "TheRealJRSmith", "Channing_Frye", "imanshumpert", "RealTristan13", "mowilliams"]
+    for handle in handles:
+        stats_player = stats[handle] 
+
+        DIST_RUN_OFF_METERS = stats_player[0]
+        AVG_SEC_PER_TCH = stats_player[1]
+        PASSES_MADE = stats_player[2]
+        PASSES_RECEIVED = stats_player[3]
+        DRIVE_TOV_PCT = stats_player[4]
+        NUM_TOUCHES = stats_player[5]
+
+        total_run = total_run + DIST_RUN_OFF_METERS
+        total_ballhold = total_ballhold + AVG_SEC_PER_TCH
+        total_pass_made = total_pass_made + PASSES_MADE
+        total_pass_received = total_pass_received + PASSES_RECEIVED
+        total_turnover = total_turnover + DRIVE_TOV_PCT
+        total_touch = total_touch + NUM_TOUCHES
+
+    avg_run = total_run/4377
+    avg_ballhold = total_ballhold/5.23
+    avg_pass = (total_pass_made/total_pass_received)/1.2
+    avg_turnover = total_turnover/1
+    avg_touch = total_touch/80
+
+    json_output = {"avg_run":  avg_run, "avg_ballhold": avg_ballhold, "avg_pass": avg_pass, "avg_turnover": avg_turnover, "avg_touch": avg_touch}
+    with open("stats_cavs.json","wb") as f:
+        f.write(json.dumps(json_output))
+
+    return 0
+
 #Creates JSON for all handles in list 
 @app.route('/search_all', methods = ['GET','POST'])
 def search_all():
     #2014-2015 source: http://www.usatoday.com/story/sports/nba/2014/10/27/nba-teams-announced-their-opening-day-rosters-for-the-2014-15-season/18035777/
-    handles = ["KingJames", "KyrieIrving", "kevinlove", "Sirdom1", "JordyMac52", "2kayzero", "TheRealJRSmith", "Channing_Frye", "imanshumpert", "RealTristan13", "mowilliams"]
     # handles = ["StephenCurry30", "Money23Green", "hbarnes", "KlayThompson", "festus", "TheBlurBarbosa", "JustHolla7", "andre", "ShaunLivingston", "Dlee042", "Mospeights16", "BRush_25"]
     # handles = []
     # handles = ["DeMar_DeRozan", "Klow7", "Cory_Joe", "JValanciunas", "T_DotFlight31", "npowell2404", "pdpatt", "jtthekid", "pskills43", "Bebe92", "Bruno_Caboclo", "EJSingler", "delonwright", "bradyheslip"]
