@@ -13,7 +13,7 @@
     <h2 class="center"> Results </h2>
     <br>
     {% if api_data %}
-      {% for player in api_data['players']}
+      {% for player in api_data['players'] %}
         <h3 class="center">Twitter Handle: {{ player['handle'] }}</h3>
         <h3 class="center">Tweet count: {{ player['count'] }}</h3>
         <h3 class="center">Tweets:</h3>
@@ -21,6 +21,7 @@
           {{ tweet }}
           <br>
         {% endfor %}
+        <br>
       {% endfor %}
     {% else %}
       <h2 class="center"> Something went wrong. </h2>
