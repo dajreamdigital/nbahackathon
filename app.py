@@ -65,9 +65,11 @@ def search():
     average = {"run": avg_run, "ballhold": avg_ballhold, "pass": avg_pass, "turnover": avg_turnover, "touch": avg_touch}
 
     return_dict = {"handle": handle, "count": count, "player": player, "average": average, "tweets": tweets}
+    json_return_dict = json.dumps(return_dict)
 
     print return_dict
-    return render_template('tweets.html', api_data = return_dict)
+    # list_return_dict = [return_dict]
+    return render_template('tweets.html', api_data = [json_return_dict, return_dict])
     # return json(api_data)
 
 
@@ -105,6 +107,7 @@ def calculate():
     avg_run = (total_run/4377)/len(handles)
     avg_ballhold = (total_ballhold/5.23)/len(handles)
     avg_pass = ((total_pass_made/total_pass_received)/1.2)
+
     avg_turnover = (total_turnover/0.2)/len(handles)
     avg_touch = (total_touch/80)/len(handles)
 

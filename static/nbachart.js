@@ -1,22 +1,25 @@
 
 
 // building the skills radar chart using chartjs
+
+console.log(data);
+
 var skillsData = {
-	labels : ["January","February","March","April","May","June"],
+	labels : ["Holding Ball","Passes Made","Distance Run","Ball Touches","Turnovers"],
 	datasets : [
 		{
 			fillColor : "rgba(172,194,132,0.4)",
 			strokeColor : "#ACC26D",
 			pointColor : "#fff",
 			pointStrokeColor : "#9DB86D",
-			data : [203,156,99,251,305,247]
+			data : [data.player.ballhold,data.player.pass,data.player.run,data.player.touch,data.player.turnover]
 		},
     {
 			fillColor : "rgba(132,194,255,0.4)",
 			strokeColor : "#ACC26D",
 			pointColor : "#fff",
 			pointStrokeColor : "#9DB86D",
-			data : [100,10,20,123,200,300]
+			data : [data.average.ballhold,data.average.pass,data.average.run,data.average.touch,data.average.turnover]
 		},
 	]
 };
@@ -37,7 +40,7 @@ var tweetData = {
 		{
       fillColor : "rgba(73,188,170,0.4)",
 			strokeColor : "rgba(72,174,209,0.4)",
-			data : [456, 123]
+			data : [10, data.count]
 		},
 	]
 };
