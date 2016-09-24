@@ -1,0 +1,36 @@
+body {
+  padding-bottom: 40px;
+  text-decoration: none;
+}
+
+.center{
+  text-align: center;
+  margin: auto;
+}
+.jumbotron {
+  padding-top:8px;
+  padding-bottom:8px;
+}
+
+.form-search {
+  max-width: 3300px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+
+.form-search .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 14px;
+  width: 400px;
+}
+
+
+.no-underline{
+   text-decoration: none;
+} 

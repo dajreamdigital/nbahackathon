@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>NBA Hackathon</title>
+    <h1 class="center">NBA Hackathon</h1>
+    <link href="/static/css/styles.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <br>
+
+  </head>
+
+  <body>
+    <h2 class="center"> Results </h2>
+    <br>
+    {% if api_data %}
+      <h3 class="center">Twitter Handle: {{ api_data[0] }}</h3>
+      <h3 class="center">Date Since: {{ api_data[1] }}</h3>
+      <h3 class="center">Date Until: {{ api_data[2] }}</h3>
+    {% else %}
+      <h2 class="center"> Something went wrong. </h2>
+    {% endif %}
+
+
+  </body>
+</html>
+

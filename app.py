@@ -16,5 +16,16 @@ def main():
     return render_template('index.html', api_data="")
 
 
+@app.route('/search', methods = ['GET','POST'])
+def search():
+    handle = request.form['handle']
+    since = request.form['since']
+    until = request.form['until']
+    return_list = [handle, since, until]
+    print(handle, since, until)
+
+    return render_template('tweets.html', api_data = return_list)
+
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
