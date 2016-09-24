@@ -13,7 +13,7 @@
     <h2 class="center"> Results </h2>
     <br>
     {% if api_data %}
-      <h3 class="center">Twitter Handle: {{ api_data['handle'] }}</h3>
+      <h3 class="center">Twitter Handle: @{{ api_data['handle'] }}</h3>
       <h3 class="center">Tweet count: {{ api_data['count'] }}</h3>
       <h3 class="center">Tweets:</h3>
       {% for tweet in api_data['tweets'] %}

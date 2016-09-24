@@ -1,4 +1,5 @@
 
+import json
 
 #gets the spot in master array of a certin stat after the gameID
 def spot(m, target):    
@@ -67,7 +68,7 @@ def dicCreate(names):
         if tempVar[:6] == "161061":
             nameFirst = names[i+3]
             nameSecond = names[i+4]
-            fullname = nameFirst + " " + nameSecond
+            fullname = nameFirst[1:] + " " + nameSecond[:-1]
             playerid = names[i+2]
             final[playerid] = fullname
     return final

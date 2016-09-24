@@ -25,7 +25,13 @@ def main():
 #Prints tweets for one handle
 @app.route('/search', methods = ['GET','POST'])
 def search():
-    handle = request.form['handle']
+
+    handles = ["KingJames", "KyrieIrving", "kevinlove", "TheRealJRSmith", "Channing_Frye", "imanshumpert", "RealTristan13", "mowilliams"]
+    names = ["LeBron James", "Kyrie Irving", "Kevin Love", "J.R. Smith", "Channing Frye", "Iman Shumpert", "Tristan Thompson", "Mo Williams"]
+    dictionary = dict(zip(names, handles))
+
+    name = request.form['name']
+    handle = dictionary[name]
 
 
     since = "2015-09-21"
@@ -40,11 +46,11 @@ def search():
     with open('stats.json') as stats_data:
         stats = json.load(stats_data)
 
-    player_run = stats[handle][0]
-    player_ballhold = stats[handle][1]
-    player_pass = stats[handle][2]/stats[handle][3]
-    player_turnover = stats[handle][4]
-    player_touch = stats[handle][5]
+    player_run = stats[name][0]/4377
+    player_ballhold = stats[name][1]/5.23
+    player_pass = (stats[name][2]/stats[name][3])/1.2
+    player_turnover = stats[name][4]/0.2
+    player_touch = stats[name][5]/80
     player = {"run": player_run, "ballhold": player_ballhold, "pass": player_pass, "turnover": player_turnover, "touch": player_touch}
 
     with open('stats_cavs.json') as stats_data:
@@ -76,9 +82,11 @@ def calculate():
     total_pass_received = 0
     total_turnover = 0
     total_touch = 0
-    handles = ["KingJames", "KyrieIrving", "kevinlove", "Sirdom1", "JordyMac52", "2kayzero", "TheRealJRSmith", "Channing_Frye", "imanshumpert", "RealTristan13", "mowilliams"]
-    for handle in handles:
-        stats_player = stats[handle] 
+    handles = ["KingJames", "KyrieIrving", "kevinlove", "TheRealJRSmith", "Channing_Frye", "imanshumpert", "RealTristan13", "mowilliams"]
+    names = ["LeBron James", "Kyrie Irving", "Kevin Love", "J.R. Smith", "Channing Frye", "Iman Shumpert", "Tristan Thompson", "Mo Williams"]
+    for i in range(0, len(handles)):
+        stats_player = stats[names[i]] 
+        print stats_player
 
         DIST_RUN_OFF_METERS = stats_player[0]
         AVG_SEC_PER_TCH = stats_player[1]
@@ -94,17 +102,18 @@ def calculate():
         total_turnover = total_turnover + DRIVE_TOV_PCT
         total_touch = total_touch + NUM_TOUCHES
 
-    avg_run = total_run/4377
-    avg_ballhold = total_ballhold/5.23
-    avg_pass = (total_pass_made/total_pass_received)/1.2
-    avg_turnover = total_turnover/1
-    avg_touch = total_touch/80
+    avg_run = (total_run/4377)/len(handles)
+    avg_ballhold = (total_ballhold/5.23)/len(handles)
+    avg_pass = ((total_pass_made/total_pass_received)/1.2)
+    avg_turnover = (total_turnover/0.2)/len(handles)
+    avg_touch = (total_touch/80)/len(handles)
 
-    json_output = {"avg_run":  avg_run, "avg_ballhold": avg_ballhold, "avg_pass": avg_pass, "avg_turnover": avg_turnover, "avg_touch": avg_touch}
+    json_output = {"avg_run": avg_run, "avg_ballhold": avg_ballhold, "avg_pass": avg_pass, "avg_turnover": avg_turnover, "avg_touch": avg_touch}
     with open("stats_cavs.json","wb") as f:
         f.write(json.dumps(json_output))
 
-    return 0
+    return render_template('index.html')
+
 
 #Creates JSON for all handles in list 
 @app.route('/search_all', methods = ['GET','POST'])
