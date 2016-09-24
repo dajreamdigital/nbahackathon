@@ -8,7 +8,7 @@ def spot(m, target):
         
 #gets index for list of stats in master array
 def statSpots(m):
-    stats = ["DIST_RUN_OFF_METERS","NUM_TOUCHES","AVG_SEC_PER_TCH"]
+    stats = ["DIST_RUN_OFF_METERS","AVG_SEC_PER_TCH", "PASSES_MADE", "PASSES_RECEIVED", "DRIVE_TOV_PCT", "NUM_TOUCHES"]
     final = []
     for i in stats:
         x = spot(m, i)
@@ -45,7 +45,7 @@ def aveDict(p):
     players = p.keys()
     for k in players:
         seasonArray = p.get(k)
-        seasonArray = seasonArray[3:]
+        seasonArray = seasonArray[6:]
         numArrays = len(seasonArray)
         tempb = seasonArray[0]
         numStats = len(tempb)
@@ -127,4 +127,6 @@ if __name__ == '__main__':
     playerIndexed = indexChange(keep2, aveStats)
     print playerIndexed
 
+    with open("stats.json","wb") as f:
+        f.write(json.dumps(playerIndexed))
     
